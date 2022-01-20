@@ -6,50 +6,52 @@
  */
 
 import * as React from "react"
-import PropTypes from "prop-types"
-import { useStaticQuery, graphql } from "gatsby"
+import "../assets/css/main.css"
+import NavBar from "./navbar"
+import Footer from "./footer"
+import SideDrawer from "./side-drawer"
+import { graphql, useStaticQuery } from "gatsby"
 
-import Header from "./header"
-import "./layout.css"
-
-const Layout = ({ children }) => {
-  const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
-      site {
-        siteMetadata {
-          title
+const query = graphql`
+  {
+    allContentfulCommerce(sort: { fields: name, order: ASC }) {
+      nodes {
+        name
+        price
+        description {
+          description
         }
+        countInStock
+        image {
+          gatsbyImageData(placeholder: TRACED_SVG, layout: CONSTRAINED)
+        }
+        id
       }
     }
-  `)
-
-  return (
-    <>
-      <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
-      <div
-        style={{
-          margin: `0 auto`,
-          maxWidth: 960,
-          padding: `0 1.0875rem 1.45rem`,
-        }}
-      >
-        <main>{children}</main>
-        <footer
-          style={{
-            marginTop: `2rem`,
-          }}
-        >
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.com">Gatsby</a>
-        </footer>
-      </div>
-    </>
+  }
+`
+export const DataContext = React.createContext(null)
+const Layout = ({ children }) => {
+  const [toggleBackdrop, setToggleBackdrop] = React.useReducer(
+    state => !state,
+    false
   )
-}
+  const { allContentfulCommerce } = useStaticQuery(query)
 
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,
+  const data = allContentfulCommerce.nodes
+  return (
+    <React.Fragment>
+      <DataContext.Provider value={{products: data}}>
+        <NavBar
+          toggleBackdrop={toggleBackdrop}
+          setToggleBackdrop={setToggleBackdrop}
+        />
+        <SideDrawer click={setToggleBackdrop} show={toggleBackdrop} />
+        {children}
+        <Footer />
+      </DataContext.Provider>
+    </React.Fragment>
+  )
 }
 
 export default Layout

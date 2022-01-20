@@ -1,31 +1,51 @@
-import * as React from "react"
-import { Link } from "gatsby"
-import { StaticImage } from "gatsby-plugin-image"
-
+import React from "react"
+import styled from "styled-components"
 import Layout from "../components/layout"
-import Seo from "../components/seo"
+import ProductList from "../components/product-list"
 
-const IndexPage = () => (
-  <Layout>
-    <Seo title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <StaticImage
-      src="../images/gatsby-astronaut.png"
-      width={300}
-      quality={95}
-      formats={["auto", "webp", "avif"]}
-      alt="A Gatsby astronaut"
-      style={{ marginBottom: `1.45rem` }}
-    />
-    <p>
-      <Link to="/page-2/">Go to page 2</Link> <br />
-      <Link to="/using-typescript/">Go to "Using TypeScript"</Link> <br />
-      <Link to="/using-ssr">Go to "Using SSR"</Link> <br />
-      <Link to="/using-dsg">Go to "Using DSG"</Link>
-    </p>
-  </Layout>
-)
+const Container = styled.main`
+  .homescreen__title {
+    font-size: 1.5rem;
+    color: #171717;
+    margin-bottom: 1rem;
+    margin-left: 8px;
+  }
 
-export default IndexPage
+  .homescreen__products {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  @media (max-width: 1232px) {
+    .homescreen__products {
+      grid-template-columns: repeat(3, auto);
+    }
+  }
+
+  @media (max-width: 950px) {
+    .homescreen__products {
+      grid-template-columns: repeat(2, auto);
+    }
+  }
+
+  @media (max-width: 630px) {
+    .homescreen__products {
+      grid-template-columns: 1fr;
+    }
+  }
+`
+
+const Home = () => {
+  return (
+    <Layout>
+      <Container>
+        <h2 className="homescreen__title">{null}</h2>
+        <div className="homescreen__products">
+          <ProductList />
+        </div>
+      </Container>
+    </Layout>
+  )
+}
+
+export default Home
