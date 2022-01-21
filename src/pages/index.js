@@ -33,6 +33,7 @@ const Container = styled.main`
 
   @media (max-width: 630px) {
     margin-bottom: 2em;
+    
     .homescreen__products {
       grid-template-columns: 1fr;
     }
