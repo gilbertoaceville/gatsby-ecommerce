@@ -1,11 +1,11 @@
-import React from "react"
-import { IoCube } from "@react-icons/all-files/io5/IoCube"
 import { FaShoppingCart } from "@react-icons/all-files/fa/FaShoppingCart"
-import styled from "styled-components"
+import { IoCube } from "@react-icons/all-files/io5/IoCube"
 import { Link } from "gatsby"
-import Backdrop from "./backdrop"
+import React from "react"
 import { useSelector } from "react-redux"
+import styled from "styled-components"
 import { cartCount } from "../utilities/function"
+import Backdrop from "./backdrop"
 
 const Container = styled.nav`
   width: 100%;
@@ -141,9 +141,9 @@ const NavBar = ({ toggleBackdrop, setToggleBackdrop }) => {
             </span>
           </Link>
         </li>
-        <li>
+        {/* <li>
           <Link to="/shop">Shop</Link>
-        </li>
+        </li> */}
       </ul>
 
       <div

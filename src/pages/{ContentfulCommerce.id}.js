@@ -1,3 +1,4 @@
+import { navigate } from "@reach/router"
 import { graphql } from "gatsby"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import React, { useState } from "react"
@@ -5,12 +6,12 @@ import { useDispatch } from "react-redux"
 import styled from "styled-components"
 import Layout from "../components/layout"
 import { addToCart } from "../state/actions/cart-actions"
-import { navigate } from "@reach/router"
 
 const Container = styled.article`
   max-width: 1300px;
   margin: 1rem auto;
   display: flex;
+  height: 100vh;
 
   .productscreen__left {
     display: flex;
@@ -89,6 +90,7 @@ const Container = styled.article`
 
     .left__image {
       flex: 1;
+      display: none;
     }
 
     .left__info {

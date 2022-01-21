@@ -4,6 +4,8 @@ import Layout from "../components/layout"
 import ProductList from "../components/product-list"
 
 const Container = styled.main`
+  margin-bottom: 4em;
+
   .homescreen__title {
     font-size: 1.5rem;
     color: #171717;
@@ -14,6 +16,7 @@ const Container = styled.main`
   .homescreen__products {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+    /* margin-bottom: 2em; */
   }
 
   @media (max-width: 1232px) {
@@ -29,6 +32,7 @@ const Container = styled.main`
   }
 
   @media (max-width: 630px) {
+    margin-bottom: 2em;
     .homescreen__products {
       grid-template-columns: 1fr;
     }

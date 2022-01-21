@@ -1,8 +1,8 @@
-import React from "react"
 import { FaShoppingCart } from "@react-icons/all-files/fa/FaShoppingCart"
-import styled from "styled-components"
 import { Link } from "gatsby"
+import React from "react"
 import { useSelector } from "react-redux"
+import styled from "styled-components"
 import { cartCount } from "../utilities/function"
 
 const Container = styled.section`
@@ -121,9 +121,9 @@ const SideDrawer = ({ click, show }) => {
               </span>
             </Link>
           </li>
-          <li>
+          {/* <li>
             <Link to="/shop">Shop</Link>
-          </li>
+          </li> */}
         </ul>
       </div>
     </Container>
