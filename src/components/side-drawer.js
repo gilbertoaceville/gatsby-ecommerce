@@ -108,7 +108,6 @@ const SideDrawer = ({ click, show }) => {
         <ul
           className="sidedrawer__links"
           role="button"
-          // tabIndex={0}
           onClick={click}
           onMouseDown={click}
         >
@@ -121,9 +120,6 @@ const SideDrawer = ({ click, show }) => {
               </span>
             </Link>
           </li>
-          {/* <li>
-            <Link to="/shop">Shop</Link>
-          </li> */}
         </ul>
       </div>
     </Container>
