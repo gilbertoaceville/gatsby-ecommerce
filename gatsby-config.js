@@ -28,10 +28,9 @@ module.exports = {
         short_name: `Bluecube`,
         start_url: `/`,
         background_color: `#ffffff`,
-        theme: `#000000`,
+        theme_color: `#000000`,
         // This will impact how browsers show your PWA/website
         // https://css-tricks.com/meta-theme-color-and-trickery/
-        // theme_color: `#663399`,
         display: `standalone`,
         icon: `src/assets/images/icon.png`, // This path is relative to the root of the site.
         crossOrigin: `use-credentials`,
@@ -39,7 +38,12 @@ module.exports = {
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
-    `gatsby-plugin-offline`,
+    {
+      resolve: `gatsby-plugin-offline`,
+      options: {
+        appendScript: require.resolve(`./src/custom-sw-code.js`),
+      }
+    },
     `gatsby-plugin-styled-components`,
     {
       resolve: `gatsby-source-contentful`,

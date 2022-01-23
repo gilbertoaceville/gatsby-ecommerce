@@ -123,9 +123,20 @@ const Product = ({ data }) => {
   } = data
   const imagePath = getImage(image)
 
+  const EnableNotifications = async () => {
+    const sw = await navigator.serviceWorker.ready
+    let pm = await sw.pushManager.subscribe({
+      userVisibleOnly: true,
+      applicationServerKey:
+        "BGoZho7PJOElP_ZrlalS1QuCF0dJJ4O_reMyIy86SroooFKokNFrXU9u1O5_gveJfIzvHgxwWVlT5LVuzC01Phw",
+    })
+    console.log(pm);
+  }
+
   const addItemToCart = () => {
-    dispatch(addToCart(data, qty));
-    navigate('/cart')
+    dispatch(addToCart(data, qty))
+    EnableNotifications()
+    navigate("/cart")
   }
 
   return (
