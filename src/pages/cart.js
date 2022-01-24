@@ -1,13 +1,12 @@
 import { Link } from "gatsby"
-import React from "react"
-import { useDispatch } from "react-redux"
-import { useSelector } from "react-redux"
+import * as React from "react"
+import { useDispatch, useSelector } from "react-redux"
 import styled from "styled-components"
 import CartItems from "../components/cart-items"
 import {
   addToCart,
   clearCart,
-  removeItemFromCart,
+  removeItemFromCart
 } from "../state/actions/cart-actions"
 import { cartCount } from "../utilities/function"
 

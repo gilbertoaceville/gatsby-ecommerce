@@ -1,8 +1,9 @@
-import { GatsbyImage, getImage } from "gatsby-plugin-image"
-import React from "react"
-import styled from "styled-components"
 import { FaTrash } from "@react-icons/all-files/fa/FaTrash"
 import { Link } from "gatsby"
+import { GatsbyImage, getImage } from "gatsby-plugin-image"
+import React from "react"
+import slugify from "slugify"
+import styled from "styled-components"
 
 const Container = styled.div`
   width: 100%;
@@ -99,7 +100,7 @@ const Container = styled.div`
 const CartItems = ({ removeHandler, qtyChangeHandler, item }) => {
   // const [qty, setQty] = useState("")
   const { id, name, price, countInStock, image, qty } = item
-  console.log(item)
+  const slug = slugify(id, { lower: true })
   const pathToImage = getImage(image)
   return (
     <Container>
@@ -110,7 +111,7 @@ const CartItems = ({ removeHandler, qtyChangeHandler, item }) => {
         placeholder="blurred"
         className="cartitem__image"
       />
-      <Link to={`/${id}`} className="cartItem__name">
+      <Link to={`/${slug}`} className="cartItem__name">
         <p>{name}</p>
       </Link>
       <p className="cartitem__price">${price}</p>

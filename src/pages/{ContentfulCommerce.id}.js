@@ -1,8 +1,7 @@
-import { navigate } from "@reach/router"
-import { graphql } from "gatsby"
+import { graphql, navigate } from "gatsby"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import React, { useState } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import styled from "styled-components"
 import Layout from "../components/layout"
 import { addToCart } from "../state/actions/cart-actions"
@@ -109,15 +108,20 @@ const Container = styled.article`
   }
 `
 
+const isBrowser = typeof window !== "undefined"
 const Product = ({ data }) => {
-  const [qty, setQty] = useState(1)
+  const [quantity, setQty] = useState(1)
   let dispatch = useDispatch()
+
+  const cart = useSelector(state => state.cart)
+  const { cartItems } = cart
   const {
     contentfulCommerce: {
       countInStock,
       image,
       name,
       price,
+      id,
       description: { description },
     },
   } = data
@@ -130,13 +134,23 @@ const Product = ({ data }) => {
       applicationServerKey:
         "BGoZho7PJOElP_ZrlalS1QuCF0dJJ4O_reMyIy86SroooFKokNFrXU9u1O5_gveJfIzvHgxwWVlT5LVuzC01Phw",
     })
-    console.log(pm);
+    console.log(pm)
   }
 
+  // const quantity = cartItems.find(x => )
   const addItemToCart = () => {
+    const existItem = cartItems.find(x => x.id === id)
+    const qty = existItem ? existItem.qty + 1 : 1
+
+    if (countInStock < qty) {
+      if (isBrowser) {
+        window.alert("Product is out of stock")
+        return
+      }
+    }
     dispatch(addToCart(data, qty))
-    EnableNotifications()
     navigate("/cart")
+    EnableNotifications()
   }
 
   return (
@@ -162,7 +176,7 @@ const Product = ({ data }) => {
             </p>
             <p>
               Qty
-              <select value={qty} onChange={e => setQty(e.target.value)}>
+              <select value={quantity} onChange={e => setQty(e.target.value)}>
                 {[...Array(countInStock).keys()].map(x => (
                   <option key={x + 1} value={x + 1}>
                     {x + 1}
